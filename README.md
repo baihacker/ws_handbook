@@ -1,4 +1,10 @@
-ws_handbook
-===========
+ws_handbook (猥琐宝典)
+======================
 
-The tricks of programming to solve problems. (猥琐宝典--计算机编程解决问题的技巧)
+The tricks of programming to solve problems. (计算机编程解决问题的技巧)
+
+终于按捺不住开了这个副本，用来总结做[project euler](http://projecteuler.net/)，[soj](http://cstest.scu.edu.cn/soj/index.action)以及其它题目中用到的猥琐技巧。计划中会有中文有英文版本。由于不能一下想到所有用到过的技巧，不能系统地对技巧进行分类，所以在计划中会先准备一个技巧资料集合，每一份资料是一个技巧，技巧中会包含技巧的名字（如果能较好的名字的话），简介，分析（可能有案例分析）。在资料整理过程中会粗略地对技巧进行分类。
+
+对于soj上的题目，分析可以很全面，细致，而project euler的玩法不同，所以在分析过程中分尽量避免剧透，或者不说明题目来源是project euler。
+
+小标题是计算机编程解决问题的技巧，这只说明技巧主要和计算机编程相关，但是这不表明必须和计算机编程相关。
