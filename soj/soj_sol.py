@@ -3,7 +3,7 @@ import sys
 import shutil
 
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
-import soj_util
+import soj_pdb
 
 def load_sol(file):
   sol = {}
@@ -14,7 +14,6 @@ def load_sol(file):
       sol = eval(tempf.read())
   return sol
 
-    
 def save_sol(sol, file):
   data = ['{']
   
@@ -25,10 +24,10 @@ def save_sol(sol, file):
   for x in solutions:
     t = []
     t.append('{')
-    t.append('"id" : "%s", "title" : "%s",'%(x["id"], x["title"].replace('"', '\\"')))
-    t.append('"ctag" : "%s",'%x["ctag"].replace('"', '\\"'))
-    t.append('"etag" : "%s",'%x["etag"].replace('"', '\\"'))
-    t.append('"brief_solution" : "%s",'%x["brief_solution"].replace('"', '\\"'))
+    t.append('"id" : "%s", "title" : \"\"\"%s\"\"\",'%(x["id"], x["title"]))
+    t.append('"ctag" : "%s",'%x["ctag"])
+    t.append('"etag" : "%s",'%x["etag"])
+    t.append('"brief_solution" : \"\"\"%s\"\"\",'%x["brief_solution"])
     t.append('},')
     data.extend(t)
   
@@ -39,15 +38,15 @@ def save_sol(sol, file):
     tempf.write('\n'.join(data))
 
 def make_empty_sol(file):
-  db = soj_util.load_db("soj_problems.json")
-  solved = soj_util.get_solved("baihacker")
+  db = soj_pdb.load_db("soj_problems.json")
+  solved = soj_pdb.get_solved("baihacker")
   sol = load_sol("")
   solutions = []
   for id in solved:
-    if not id in db["index"]: continue
+    if not id in db["problems"]: continue
     dic = {}
     dic["id"] = id
-    dic["title"] = db["index"][id]
+    dic["title"] = db["problems"][id]["title"]
     dic["ctag"] = ""
     dic["etag"] = ""
     dic["brief_solution"] = ""
@@ -56,5 +55,7 @@ def make_empty_sol(file):
   save_sol(sol, file)
 
 if __name__ == "__main__":
+  #make_empty_sol("soj_solutions.json")
   sol = load_sol("soj_solutions.json")
+  #save_sol(sol, "soj_solutions.json")
   print(len(sol["solutions"]))
