@@ -1,3 +1,4 @@
+#-*- coding: utf8 -*-
 import urllib
 import urllib.request
 import re
@@ -41,8 +42,8 @@ def load_db(file):
   db["checked_page"] = []
   db["problems"] = {}
   if os.path.exists(file):
-    with open(file, 'r') as tempf:
-      db = eval(tempf.read())
+    with open(file, 'rb') as tempf:
+      db = eval(tempf.read().decode(encoding='utf8',errors='ignore'))
       db["problems"] = {item["id"]:item for item in db["problems"]}
   return db
 
@@ -83,12 +84,15 @@ def save_db(db, file):
   data.append(']')
   data.append('}')
   
-  with open(file, 'w') as tempf:
-    tempf.write('\n'.join(data))
+  with open(file, 'wb') as tempf:
+    tempf.write('\r\n'.join(data).encode(encoding='utf8',errors='ignore'))
 
 def insert_problem(db, item):
   if not item[0] in db["problems"]:
     db["problems"][item[0]] = item[1]
+  else:
+    db["problems"][item[0]]['submit'] = item[1]['submit']
+    db["problems"][item[0]]['solved'] = item[1]['solved']
 
 def update_problem_list(file):
   db = load_db(file)
@@ -113,7 +117,7 @@ def update_enable_state(file):
     save_db(db, file)
 
 def get_solved(id):
-  url = "http://cstest.scu.edu.cn/soj/user.action?id=%s"%urllib.parse.quote(id, encoding="gbk")
+  url = "http://cstest.scu.edu.cn/soj/user.action?id=%s"%urllib.parse.quote(id, encoding='gbk')
   f = urllib.request.urlopen(url)
   result = f.read().decode(encoding='gbk',errors='ignore')
   items = re.findall(r'<a href="problem.action\?id=\d+">\d+</a>', result)
