@@ -1,3 +1,4 @@
+#-*- coding: utf8 -*-
 import os
 import sys
 import shutil
@@ -10,8 +11,8 @@ def load_sol(file):
   sol["count"] = 0
   sol["solutions"] = []
   if os.path.exists(file):
-    with open(file, 'r') as tempf:
-      sol = eval(tempf.read())
+    with open(file, 'rb') as tempf:
+      sol = eval(tempf.read().decode(encoding='utf8',errors='ignore'))
   return sol
 
 def save_sol(sol, file):
@@ -34,8 +35,8 @@ def save_sol(sol, file):
   data.append(']')
   data.append('}')
   
-  with open(file, 'w') as tempf:
-    tempf.write('\n'.join(data))
+  with open(file, 'wb') as tempf:
+    tempf.write('\r\n'.join(data).encode(encoding='utf8',errors='ignore'))
 
 def make_empty_sol(file):
   db = soj_pdb.load_db("soj_problems.json")
