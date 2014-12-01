@@ -4,25 +4,25 @@
 {
 "id" : "1001", "title" : """A + B Problem""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation",
 "brief_solution" : """""",
 },
 {
 "id" : "1002", "title" : """A + B Problem (Big integer version)""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation,big integer",
 "brief_solution" : """""",
 },
 {
 "id" : "1003", "title" : """A * B Problem (Big integer version)""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation,big integer",
 "brief_solution" : """""",
 },
 {
 "id" : "1004", "title" : """A / B Problem (Big integer version)""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation,big integer",
 "brief_solution" : """""",
 },
 {
@@ -34,31 +34,31 @@
 {
 "id" : "1006", "title" : """The Hardest Problem Ever""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation",
 "brief_solution" : """""",
 },
 {
 "id" : "1007", "title" : """Rubik's Cube Solver""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation,simulation",
 "brief_solution" : """""",
 },
 {
 "id" : "1008", "title" : """Climbing Trees""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation,brute force,trees",
 "brief_solution" : """""",
 },
 {
 "id" : "1009", "title" : """Dollars""",
 "ctag" : "",
-"etag" : "",
-"brief_solution" : """""",
+"etag" : "dp,combinatorics",
+"brief_solution" : """dp[i][j]表示考虑前j种数，i的组合方式，可能需要注意更新的顺序。""",
 },
 {
 "id" : "1010", "title" : """Mutant Flatworld Explorers""",
 "ctag" : "",
-"etag" : "",
+"etag" : "implementation,simulation",
 "brief_solution" : """""",
 },
 {
