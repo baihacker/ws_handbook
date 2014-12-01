@@ -29,3 +29,6 @@ hashing,
 matrices,
 big integer,
 simulation,
+sweep line,
+recursion,
+principle of compiling
