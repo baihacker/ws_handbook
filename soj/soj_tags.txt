@@ -31,4 +31,10 @@ big integer,
 simulation,
 sweep line,
 recursion,
-principle of compiling
+principle of compiling,
+search,
+computational geometry,
+discretization,
+spfa,
+floyd,
+greedy
