@@ -38,4 +38,6 @@ discretization,
 spfa,
 floyd,
 greedy,
-preprocess
+preprocess,
+sg,
+convex hull
