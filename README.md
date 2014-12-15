@@ -12,3 +12,7 @@ The tricks of programming to solve problems. (计算机编程解决问题的技�
 猥琐心法：
 =========
 充分把握已有资源，在问题最薄弱的地方给出致命一击。（[心法配图](http://image.baidu.com/i?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fm=index&fr=&sf=1&fmq=&pv=&ic=0&nc=1&z=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=%E5%8D%83%E5%B9%B4%E6%9D%80&oq=%E5%8D%83%E5%B9%B4%E6%9D%80&rsp=-1)）
+
+Updated:
+========
+Soj solution is available now. (The problems I solved before 1799)
