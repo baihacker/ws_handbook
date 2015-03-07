@@ -46,4 +46,6 @@ system of difference constraints,
 quadrilateral inequation,
 partition problem,
 number theory,
-monotonous queue(deque, stack)
+monotonous queue(deque, stack),
+matrix multiplication,
+inclusion–exclusion principle,
