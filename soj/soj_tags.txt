@@ -55,3 +55,8 @@ game theory,
 enumeration,
 map,
 suffix array,
+mst,
+spfa,
+hacking,
+gauss elimination,
+match
