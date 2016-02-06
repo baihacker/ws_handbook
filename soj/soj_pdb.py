@@ -6,7 +6,7 @@ import time
 import os
 
 def get_problems(page):
-  url = "http://cstest.scu.edu.cn/soj/problems.action?volume=%d"%page
+  url = "http://acm.scu.edu.cn/soj/problems.action?volume=%d"%page
   f = urllib.request.urlopen(url)
   text = f.read().decode(encoding='gbk',errors='ignore')
 
@@ -108,7 +108,7 @@ def update_enable_state(file):
   p_submit = re.compile(r'<a href="submit_form.action\?id=\d+">Submit your solution</a>')
   for k, v in db["problems"].items():
     if "enable" in v: continue
-    url = "http://cstest.scu.edu.cn/soj/problem.action?id=%s"%k
+    url = "http://acm.scu.edu.cn/soj/problem.action?id=%s"%k
     f = urllib.request.urlopen(url)
     text = f.read().decode(encoding='gbk',errors='ignore')
     exist = p_submit.findall(text)
@@ -117,7 +117,7 @@ def update_enable_state(file):
     save_db(db, file)
 
 def get_solved(id):
-  url = "http://cstest.scu.edu.cn/soj/user.action?id=%s"%urllib.parse.quote(id, encoding='gbk')
+  url = "http://acm.scu.edu.cn/soj/user.action?id=%s"%urllib.parse.quote(id, encoding='gbk')
   f = urllib.request.urlopen(url)
   result = f.read().decode(encoding='gbk',errors='ignore')
   items = re.findall(r'<a href="problem.action\?id=\d+">\d+</a>', result)
