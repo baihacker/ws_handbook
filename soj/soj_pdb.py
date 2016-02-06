@@ -41,6 +41,7 @@ def load_db(file):
   db["enabled"] = 0
   db["checked_page"] = []
   db["problems"] = {}
+  db["last_update"] = 0.0
   if os.path.exists(file):
     with open(file, 'rb') as tempf:
       db = eval(tempf.read().decode(encoding='utf8',errors='ignore'))
@@ -80,6 +81,7 @@ def save_db(db, file):
   
   data.insert(2, '"enabled" : %d,'%enabled)
   data.insert(3, '"zero_ac" : %d,'%zero_ac)
+  data.insert(4, '"last_update" : %f,'%time.time())
   
   data.append(']')
   data.append('}')
