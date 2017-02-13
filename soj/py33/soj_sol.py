@@ -12,7 +12,7 @@ def load_sol(file):
   sol["solutions"] = []
   if os.path.exists(file):
     with open(file, 'rb') as tempf:
-      sol = eval(tempf.read())
+      sol = eval(tempf.read().decode(encoding='utf8',errors='ignore'))
   return sol
 
 def save_sol(sol, file):

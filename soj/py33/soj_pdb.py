@@ -1,44 +1,14 @@
 #-*- coding: utf8 -*-
 import urllib
+import urllib.request
 import re
 import time
 import os
-import socket
-
-socket.setdefaulttimeout(20) 
-
-run_on_server = False
-run_on_local = not run_on_server
-
-mc = None
-
-# memcache
-def memcache_client():
-   global mc
-   if mc != None: return mc
-   
-   try:
-        memcache = __import__('memcache')
-        mc = memcache.Client(['127.0.0.1:12345'],debug=0)
-        return ret
-   except:
-        return None
-
-def cached_get(key, para, get_data):
-   if run_on_local: return get_data(para)
-   memcache_client()
-   if mc != None:
-      result = mc.get(key)
-      if result != None: return result
-   result = get_data(para)
-   if result != None:
-      if mc != None: mc.set(key, result)
-   return result 
 
 def get_problems(page):
   url = "http://acm.scu.edu.cn/soj/problems.action?volume=%d"%page
-  f = urllib.urlopen(url)
-  text = f.read().decode(encoding='gbk',errors='ignore').encode(encoding='utf8', errors='ignore')
+  f = urllib.request.urlopen(url)
+  text = f.read().decode(encoding='gbk',errors='ignore')
 
   p_problem = re.compile(r'<a href="problem.action\?id=\d+">.*?</a></td>.*?<td align="right">\d+</td>.*?<td align="right"><a href="problem_best_solutions.action\?id=\d+">\d+</a></td>', re.S)
 
@@ -65,13 +35,6 @@ def get_problems(page):
 
   return ret
 
-def load_db_data(file):
-  if os.path.exists(file):
-     with open(file, 'rb') as tempf:
-        result = tempf.read();
-        return True, result
-  return False, '' 
-
 def load_db(file):
   db = {}
   db["count"] = 0
@@ -79,10 +42,10 @@ def load_db(file):
   db["checked_page"] = []
   db["problems"] = {}
   db["last_update"] = 0.0
-  ok, text = load_db_data(file)
-  if ok == True:
-    db = eval(text)
-    db["problems"] = {item["id"]:item for item in db["problems"]}
+  if os.path.exists(file):
+    with open(file, 'rb') as tempf:
+      db = eval(tempf.read().decode(encoding='utf8',errors='ignore'))
+      db["problems"] = {item["id"]:item for item in db["problems"]}
   return db
 
 def save_db(db, file):
@@ -124,7 +87,7 @@ def save_db(db, file):
   data.append('}')
   
   with open(file, 'wb') as tempf:
-    tempf.write('\r\n'.join(data))
+    tempf.write('\r\n'.join(data).encode(encoding='utf8',errors='ignore'))
 
 def insert_problem(db, item):
   if not item[0] in db["problems"]:
@@ -135,7 +98,7 @@ def insert_problem(db, item):
 
 def update_problem_list(file):
   db = load_db(file)
-  for page in range(0, 36):
+  for page in range(0, 34):
     if page in db["checked_page"]: continue
     problems = get_problems(page)
     for item in problems: insert_problem(db, item)
@@ -148,23 +111,19 @@ def update_enable_state(file):
   for k, v in db["problems"].items():
     if "enable" in v: continue
     url = "http://acm.scu.edu.cn/soj/problem.action?id=%s"%k
-    f = urllib.urlopen(url)
-    text = f.read().decode(encoding='gbk',errors='ignore').encode(encoding='utf8',errors='ignore')
+    f = urllib.request.urlopen(url)
+    text = f.read().decode(encoding='gbk',errors='ignore')
     exist = p_submit.findall(text)
     print("update enable state : %s"%k)
     v["enable"] = 1 if len(exist) > 0 else 0
     save_db(db, file)
 
-def get_solved_from_web(id):
-  url = "http://acm.scu.edu.cn/soj/user.action?id=%s"%urllib.quote(id.decode('utf8').encode('gbk'))
-  f = urllib.urlopen(url)
-  result = f.read().decode(encoding='gbk',errors='ignore').encode(encoding='utf8',errors='ignore')
-  return result
-
 def get_solved(id):
-  result = cached_get(id, id, get_solved_from_web)
+  url = "http://acm.scu.edu.cn/soj/user.action?id=%s"%urllib.parse.quote(id, encoding='gbk')
+  f = urllib.request.urlopen(url)
+  result = f.read().decode(encoding='gbk',errors='ignore')
   items = re.findall(r'<a href="problem.action\?id=\d+">\d+</a>', result)
-  return [item[-8:-4] for item in items]
+  return set([item[-8:-4] for item in items])
 
 if __name__ == "__main__":
   update_problem_list("soj_problems.json")
