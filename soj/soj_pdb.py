@@ -156,7 +156,7 @@ def update_enable_state(file):
     save_db(db, file)
 
 def get_solved_from_web(id):
-  url = "http://acm.scu.edu.cn/soj/user.action?id=%s"%urllib.quote(id.decode('utf8').encode('gbk'))
+  url = "http://acm.scu.edu.cn/soj/user.action?%s"%urllib.urlencode({"id":id})
   f = urllib.urlopen(url)
   result = f.read().decode(encoding='gbk',errors='ignore').encode(encoding='utf8',errors='ignore')
   return result
