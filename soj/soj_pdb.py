@@ -7,7 +7,7 @@ import socket
 
 socket.setdefaulttimeout(20) 
 
-run_on_server = False
+run_on_server = True
 run_on_local = not run_on_server
 
 mc = None
@@ -32,7 +32,7 @@ def cached_get(key, para, get_data):
       if result != None: return result
    result = get_data(para)
    if result != None:
-      if mc != None: mc.set(key, result)
+      if mc != None: mc.set(key, result, time=60*60*24)
    return result 
 
 def get_problems(page):
