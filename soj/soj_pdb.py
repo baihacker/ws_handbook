@@ -135,7 +135,7 @@ def insert_problem(db, item):
 
 def update_problem_list(file):
   db = load_db(file)
-  for page in range(0, 37):
+  for page in range(0, 38):
     if page in db["checked_page"]: continue
     problems = get_problems(page)
     for item in problems: insert_problem(db, item)
