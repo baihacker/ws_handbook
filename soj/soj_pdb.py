@@ -65,22 +65,29 @@ def get_problems(page):
 
   return ret
 
-def load_db_data(file):
-  if os.path.exists(file):
-     with open(file, 'rb') as tempf:
+def load_file_data(file, key=None):
+  def read_file_data(f):
+    if os.path.exists(f):
+      with open(f, 'rb') as tempf:
         result = tempf.read();
-        return True, result
-  return False, '' 
+        return result
+    else:
+      return None
 
-def load_db(file):
+  if key == None:
+    return read_file_data(file)
+  else:
+    return cached_get(key, file, read_file_data)
+
+def load_db(file, key=None):
   db = {}
   db["count"] = 0
   db["enabled"] = 0
   db["checked_page"] = []
   db["problems"] = {}
   db["last_update"] = 0.0
-  ok, text = load_db_data(file)
-  if ok == True:
+  text = load_file_data(file, key)
+  if text != None:
     db = eval(text)
     db["problems"] = {item["id"]:item for item in db["problems"]}
   return db

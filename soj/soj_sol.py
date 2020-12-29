@@ -6,13 +6,13 @@ import shutil
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import soj_pdb
 
-def load_sol(file):
+def load_sol(file, key=None):
   sol = {}
   sol["count"] = 0
   sol["solutions"] = []
-  if os.path.exists(file):
-    with open(file, 'rb') as tempf:
-      sol = eval(tempf.read())
+  text = soj_pdb.load_file_data(file, key)
+  if text != None:
+    sol = eval(text)
   return sol
 
 def save_sol(sol, file):
