@@ -174,7 +174,7 @@ def work_html():
     if len(sys.argv) <= 2:
       print('error!')
       return
-    user = sys.argv[2]
+    user = urllib.parse.unquote(sys.argv[2])
     info = get_user_info(user)
     if not 'error' in info or info['error'] != 0:
       print('error!')
@@ -383,4 +383,4 @@ def work_html():
 
 
 if __name__ == "__main__":
-  work_cmd()
+  work_html()

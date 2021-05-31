@@ -102,3 +102,4 @@ if __name__ == "__main__":
   #soj_db.save_db(db, "soj_problems.json")
   sol = soj_db.load_sol("soj_solutions.json")
   print(len(sol["solutions"]))
+  print(soj_db.get_user_solved('baihacker'))

@@ -33,6 +33,7 @@ def cached_get(key, para, get_data):
   if run_on_local:
     return get_data(para)
   memcache_client()
+
   if mc != None:
     result = mc.get(key)
     if result != None:
