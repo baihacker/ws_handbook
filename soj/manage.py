@@ -72,7 +72,7 @@ def update_problem_list(file):
   for page in range(0, 38):
     if page in db["checked_page"]:
       continue
-    problems = soj_db.get_problems(page)
+    problems = get_problems(page)
     for item in problems:
       insert_problem(db, item)
     db["checked_page"].append(page)
@@ -96,10 +96,10 @@ def update_enable_state(file):
 
 
 if __name__ == "__main__":
-  #update_problem_list("soj_problems.json")
-  #update_enable_state("soj_problems.json")
-  #db = soj_db.load_db("soj_problems.json")
-  #soj_db.save_db(db, "soj_problems.json")
-  sol = soj_db.load_sol("soj_solutions.json")
-  print(len(sol["solutions"]))
-  print(soj_db.get_user_solved('baihacker'))
+  update_problem_list("soj_problems.json")
+  update_enable_state("soj_problems.json")
+  db = soj_db.load_db("soj_problems.json")
+  soj_db.save_db(db, "soj_problems.json")
+  #sol = soj_db.load_sol("soj_solutions.json")
+  #print(len(sol["solutions"]))
+  #print(soj_db.get_user_solved('baihacker'))
